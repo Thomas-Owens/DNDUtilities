@@ -100,7 +100,7 @@
             this.classComboBox.Location = new System.Drawing.Point(199, 65);
             this.classComboBox.Name = "classComboBox";
             this.classComboBox.Size = new System.Drawing.Size(121, 21);
-            this.classComboBox.TabIndex = 0;
+            this.classComboBox.TabIndex = 18;
             // 
             // ClassLabel
             // 
@@ -127,7 +127,7 @@
             this.raceComboBox.Location = new System.Drawing.Point(199, 25);
             this.raceComboBox.Name = "raceComboBox";
             this.raceComboBox.Size = new System.Drawing.Size(121, 21);
-            this.raceComboBox.TabIndex = 3;
+            this.raceComboBox.TabIndex = 17;
             // 
             // pcNameLabel
             // 
@@ -144,7 +144,7 @@
             this.pcNameTextBox.MaxLength = 50;
             this.pcNameTextBox.Name = "pcNameTextBox";
             this.pcNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.pcNameTextBox.TabIndex = 5;
+            this.pcNameTextBox.TabIndex = 1;
             // 
             // playerNameLabel
             // 
@@ -161,7 +161,7 @@
             this.playerNameTextBox.MaxLength = 50;
             this.playerNameTextBox.Name = "playerNameTextBox";
             this.playerNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.playerNameTextBox.TabIndex = 7;
+            this.playerNameTextBox.TabIndex = 2;
             // 
             // dietyLabel
             // 
@@ -178,7 +178,7 @@
             this.dietyTextBox.MaxLength = 50;
             this.dietyTextBox.Name = "dietyTextBox";
             this.dietyTextBox.Size = new System.Drawing.Size(100, 20);
-            this.dietyTextBox.TabIndex = 9;
+            this.dietyTextBox.TabIndex = 3;
             // 
             // alignmentLabel
             // 
@@ -196,7 +196,7 @@
             this.alignmentComboBox.Location = new System.Drawing.Point(199, 105);
             this.alignmentComboBox.Name = "alignmentComboBox";
             this.alignmentComboBox.Size = new System.Drawing.Size(121, 21);
-            this.alignmentComboBox.TabIndex = 11;
+            this.alignmentComboBox.TabIndex = 19;
             // 
             // genderLabel
             // 
@@ -213,7 +213,7 @@
             this.genderTextBox.MaxLength = 50;
             this.genderTextBox.Name = "genderTextBox";
             this.genderTextBox.Size = new System.Drawing.Size(100, 20);
-            this.genderTextBox.TabIndex = 13;
+            this.genderTextBox.TabIndex = 4;
             // 
             // heightLabel
             // 
@@ -257,7 +257,7 @@
             this.eyesTextBox.MaxLength = 50;
             this.eyesTextBox.Name = "eyesTextBox";
             this.eyesTextBox.Size = new System.Drawing.Size(100, 20);
-            this.eyesTextBox.TabIndex = 21;
+            this.eyesTextBox.TabIndex = 8;
             // 
             // hairLabel
             // 
@@ -274,7 +274,7 @@
             this.hairTextBox.MaxLength = 50;
             this.hairTextBox.Name = "hairTextBox";
             this.hairTextBox.Size = new System.Drawing.Size(100, 20);
-            this.hairTextBox.TabIndex = 23;
+            this.hairTextBox.TabIndex = 9;
             // 
             // skinLabel
             // 
@@ -291,14 +291,14 @@
             this.skinTextBox.MaxLength = 50;
             this.skinTextBox.Name = "skinTextBox";
             this.skinTextBox.Size = new System.Drawing.Size(100, 20);
-            this.skinTextBox.TabIndex = 25;
+            this.skinTextBox.TabIndex = 10;
             // 
             // submitGeneralInfo
             // 
             this.submitGeneralInfo.Location = new System.Drawing.Point(410, 394);
             this.submitGeneralInfo.Name = "submitGeneralInfo";
             this.submitGeneralInfo.Size = new System.Drawing.Size(100, 23);
-            this.submitGeneralInfo.TabIndex = 26;
+            this.submitGeneralInfo.TabIndex = 20;
             this.submitGeneralInfo.Text = "Submit";
             this.submitGeneralInfo.UseVisualStyleBackColor = true;
             this.submitGeneralInfo.Click += new System.EventHandler(this.submitGeneralInfo_Click);
@@ -309,7 +309,7 @@
             this.ageTextBox.MaxLength = 4;
             this.ageTextBox.Name = "ageTextBox";
             this.ageTextBox.Size = new System.Drawing.Size(100, 20);
-            this.ageTextBox.TabIndex = 30;
+            this.ageTextBox.TabIndex = 7;
             // 
             // weightTextBox
             // 
@@ -317,7 +317,7 @@
             this.weightTextBox.MaxLength = 4;
             this.weightTextBox.Name = "weightTextBox";
             this.weightTextBox.Size = new System.Drawing.Size(100, 20);
-            this.weightTextBox.TabIndex = 31;
+            this.weightTextBox.TabIndex = 6;
             // 
             // heightTextBox
             // 
@@ -325,7 +325,7 @@
             this.heightTextBox.MaxLength = 4;
             this.heightTextBox.Name = "heightTextBox";
             this.heightTextBox.Size = new System.Drawing.Size(100, 20);
-            this.heightTextBox.TabIndex = 32;
+            this.heightTextBox.TabIndex = 5;
             // 
             // AbilityScoreGroupBox
             // 
@@ -543,7 +543,7 @@
             this.abilityTextBox6.MaxLength = 2;
             this.abilityTextBox6.Name = "abilityTextBox6";
             this.abilityTextBox6.Size = new System.Drawing.Size(42, 20);
-            this.abilityTextBox6.TabIndex = 14;
+            this.abilityTextBox6.TabIndex = 16;
             this.abilityTextBox6.TextChanged += new System.EventHandler(this.abilityTextBox_TextChanged);
             // 
             // abilityTextBox5
@@ -553,7 +553,7 @@
             this.abilityTextBox5.MaxLength = 2;
             this.abilityTextBox5.Name = "abilityTextBox5";
             this.abilityTextBox5.Size = new System.Drawing.Size(42, 20);
-            this.abilityTextBox5.TabIndex = 13;
+            this.abilityTextBox5.TabIndex = 15;
             this.abilityTextBox5.TextChanged += new System.EventHandler(this.abilityTextBox_TextChanged);
             // 
             // abilityTextBox4
@@ -563,7 +563,7 @@
             this.abilityTextBox4.MaxLength = 2;
             this.abilityTextBox4.Name = "abilityTextBox4";
             this.abilityTextBox4.Size = new System.Drawing.Size(42, 20);
-            this.abilityTextBox4.TabIndex = 12;
+            this.abilityTextBox4.TabIndex = 14;
             this.abilityTextBox4.TextChanged += new System.EventHandler(this.abilityTextBox_TextChanged);
             // 
             // abilityTextBox3
@@ -573,7 +573,7 @@
             this.abilityTextBox3.MaxLength = 2;
             this.abilityTextBox3.Name = "abilityTextBox3";
             this.abilityTextBox3.Size = new System.Drawing.Size(42, 20);
-            this.abilityTextBox3.TabIndex = 11;
+            this.abilityTextBox3.TabIndex = 13;
             this.abilityTextBox3.TextChanged += new System.EventHandler(this.abilityTextBox_TextChanged);
             // 
             // abilityTextBox2
@@ -583,7 +583,7 @@
             this.abilityTextBox2.MaxLength = 2;
             this.abilityTextBox2.Name = "abilityTextBox2";
             this.abilityTextBox2.Size = new System.Drawing.Size(42, 20);
-            this.abilityTextBox2.TabIndex = 10;
+            this.abilityTextBox2.TabIndex = 12;
             this.abilityTextBox2.TextChanged += new System.EventHandler(this.abilityTextBox_TextChanged);
             // 
             // abilityTextBox1
@@ -593,7 +593,7 @@
             this.abilityTextBox1.MaxLength = 2;
             this.abilityTextBox1.Name = "abilityTextBox1";
             this.abilityTextBox1.Size = new System.Drawing.Size(42, 20);
-            this.abilityTextBox1.TabIndex = 9;
+            this.abilityTextBox1.TabIndex = 11;
             this.abilityTextBox1.TextChanged += new System.EventHandler(this.abilityTextBox_TextChanged);
             // 
             // abilityScoreValue
