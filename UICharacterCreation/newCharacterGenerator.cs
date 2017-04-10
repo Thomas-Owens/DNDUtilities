@@ -170,6 +170,7 @@ namespace UICharacterCreation
                         classID = pClass.key;
                     }
                 }
+                MessageBox.Show(PC.ID.ToString());  // BROKEN!!!
                 PC.classLevels = new Character_classes(PC.ID, classID, 1, 1);
                 PC.classLevels.save();      // not a bool just hope it works
                 Classes UsedClass = new Classes();
