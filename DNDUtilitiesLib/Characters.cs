@@ -15,7 +15,7 @@ namespace DNDUtilitiesLib
         //declare constants
         const string TABLE = "characters";
         const string FIELD = "character_id";
-
+        
         //Setup fields with properties
 
         public int character_id
@@ -42,16 +42,22 @@ namespace DNDUtilitiesLib
             set;
         }
 
+        public int career_level
+        {
+            get;
+            set;
+        }
+
         public string race
         {
             get;
             set;
         }
 
-        private int race_id
+        public int race_id
         {
             get;
-            set;
+            private set;
         }
 
         public string alignment
@@ -60,16 +66,29 @@ namespace DNDUtilitiesLib
             set;
         }
 
-        private int alignment_id
+        public int alignment_id
         {
             get;
-            set;
+            private set;
         }
 
         public string deity
         {
             get;
             set;
+        }
+
+        public string size
+        {
+            get;
+            set;
+        }
+
+
+        public int size_id
+        {
+            get;
+            private set;
         }
 
         public int age
@@ -120,7 +139,25 @@ namespace DNDUtilitiesLib
             set;
         }
 
-        public int deleted
+        public int speed
+        {
+            get;
+            set;
+        }
+
+        public int experience_points
+        {
+            get;
+            set;
+        }
+
+        public int money
+        {
+            get;
+            set;
+        }
+
+        private int deleted
         {
             get;
             set;
@@ -228,7 +265,7 @@ namespace DNDUtilitiesLib
         /// Get all character names
         /// </summary>
         /// <returns>list of all names</returns>
-        public List<NameKey> retrieveAll()
+        public static List<NameKey> retrieveAll()
         {
             return retrieveAll(TABLE, FIELD);
         }
@@ -236,10 +273,11 @@ namespace DNDUtilitiesLib
         /// <summary>
         /// Save record in database if does not exist Update existing record otherwise
         /// </summary>
-        /// <returns>true if saved false otherwise</returns>
-        public bool save()
+        /// <returns>character_id is successful -1 otherwise</returns>
+        public int save()
         {
             int i;
+            int id;
             String sql;
             
             using (SQLiteConnection conn = new SQLiteConnection())
@@ -247,73 +285,98 @@ namespace DNDUtilitiesLib
                 // tests if record exists
                 if (!keyExists(TABLE, FIELD, character_id))
                 {
-                    sql = "INSERT INTO characters (name, player_name, number_of_classes, " +
-                    "race_id, alignment_id, deity, age, gender, height, weight, eyes, hair, skin, description, deleted)" +
-                        " VALUES (@id1, @id2, @id3, @id4, @id5, @id6, @id7, @id8, @id9, @id10, @id11, @id12, @id13, @id14, @id15)";
-                    i = runSqlite(sql, true);
+                    sql = "INSERT INTO characters (name, player_name, number_of_classes, career_level, " +
+                    "race_id, alignment_id, deity, size_id, age, gender, height, weight, eyes, hair, skin, description, " +
+                    "speed, experience_points, money, deleted)" +
+                        " VALUES (@id1, @id2, @id3, @id4, " + 
+                        "(SELECT race_id FROM races WHERE name = @id5), "+
+                        "(SELECT alignment_id FROM alignments WHERE name = @id6), " +
+                        "@id7, " + 
+                        "(SELECT size_id FROM sizes WHERE name = @id8), " +
+                        "@id9, @id10, @id11, @id12, @id13, @id14, @id15, @id16, @id17, @id18, @id19, 0);" + 
+                        "SELECT character_id FROM characters WHERE name = @id1 AND player_name = @id2 AND deleted = 0";
+                  
+                    conn.ConnectionString = CONNECTION_STR;
+                    conn.Open();
+                    SQLiteCommand command = conn.CreateCommand();
+                    command.CommandText = sql;
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.Parameters.AddWithValue("id1", this.name);
+                    command.Parameters.AddWithValue("id2", this.player_name);
+                    command.Parameters.AddWithValue("id3", this.number_of_classes);
+                    command.Parameters.AddWithValue("id4", this.career_level);
+                    command.Parameters.AddWithValue("id5", this.race);
+                    command.Parameters.AddWithValue("id6", this.alignment);
+                    command.Parameters.AddWithValue("id7", this.deity);
+                    command.Parameters.AddWithValue("id8", this.size);
+                    command.Parameters.AddWithValue("id9", this.age);
+                    command.Parameters.AddWithValue("id10", this.gender);
+                    command.Parameters.AddWithValue("id11", this.height);
+                    command.Parameters.AddWithValue("id12", this.weight);
+                    command.Parameters.AddWithValue("id13", this.eyes);
+                    command.Parameters.AddWithValue("id14", this.hair);
+                    command.Parameters.AddWithValue("id15", this.skin);
+                    command.Parameters.AddWithValue("id16", this.description);
+                    command.Parameters.AddWithValue("id17", this.speed);
+                    command.Parameters.AddWithValue("id18", this.experience_points);
+                    command.Parameters.AddWithValue("id19", this.money);
+           
+
+                    id = Int32.Parse(command.ExecuteScalar().ToString());
+                    conn.Close();
+                    if (id > 0)
+                        character_id = id;
+                    else
+                        id = -1;
+
                 }
                 else
                 {
-                    sql = "UPDATE characters SET name = @id1, player_name = @id2, " + 
-                        "number_of_classes = @id3, race_id = @id4, alignment_id = @id5, " +
-                        "deity = @id6, age = @id7, gender = @id8, height = @id9, " + 
-                        "weight = @id10, eyes = @id11, hair = @id12, skin = @id13, " +
-                        "description = @id14 WHERE character_id = @id15";
-                    i = runSqlite(sql, false);
+                    sql = "UPDATE characters SET name = @id1, player_name = @id2, number_of_classes = @id3, career_level = @id4, "+
+                        "race_id = (SELECT race_id FROM races WHERE name = @id5), " +
+                        "alignment_id = (SELECT alignment_id FROM alignments WHERE name = @id6), " +
+                        "deity = @id7, " +
+                        "size_id = (SELECT size_id FROM sizes WHERE name = @id8), " +
+                        "age = @id9, gender = @id10, height = @id11, " + 
+                        "weight = @id12, eyes = @id13, hair = @id14, skin = @id15, " +
+                        "description = @id16, speed = @id17, experience_points = @id18, money = @id19 WHERE character_id = @id20";
+
+                    conn.ConnectionString = CONNECTION_STR;
+                    conn.Open();
+                    SQLiteCommand command = conn.CreateCommand();
+                    command.CommandText = sql;
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.Parameters.AddWithValue("id1", this.name);
+                    command.Parameters.AddWithValue("id2", this.player_name);
+                    command.Parameters.AddWithValue("id3", this.number_of_classes);
+                    command.Parameters.AddWithValue("id4", this.career_level);
+                    command.Parameters.AddWithValue("id5", this.race);
+                    command.Parameters.AddWithValue("id6", this.alignment);
+                    command.Parameters.AddWithValue("id7", this.deity);
+                    command.Parameters.AddWithValue("id8", this.size);
+                    command.Parameters.AddWithValue("id9", this.age);
+                    command.Parameters.AddWithValue("id10", this.gender);
+                    command.Parameters.AddWithValue("id11", this.height);
+                    command.Parameters.AddWithValue("id12", this.weight);
+                    command.Parameters.AddWithValue("id13", this.eyes);
+                    command.Parameters.AddWithValue("id14", this.hair);
+                    command.Parameters.AddWithValue("id15", this.skin);
+                    command.Parameters.AddWithValue("id16", this.description);
+                    command.Parameters.AddWithValue("id17", this.speed);
+                    command.Parameters.AddWithValue("id18", this.experience_points);
+                    command.Parameters.AddWithValue("id19", this.money);
+                    command.Parameters.AddWithValue("id20", this.character_id);
+
+                    i = command.ExecuteNonQuery();
+                    conn.Close();
+                    if (i > 0)
+                        id = character_id;
+                    else
+                        id = -1;
                 }
 
-                if (i > 0)
-                    return true;
-                else
-                    return false;
+                return id;
             }
-        }
-
-        /// <summary>
-        /// Helper function to establish connection to database and run a non query
-        /// </summary>
-        /// <param name="sql">String with SQL statement</param>
-        /// <returns>number of records affected</returns>
-        private int runSqlite(String sql, bool isInsert)
-        {
-            int i;
-            using (SQLiteConnection conn = new SQLiteConnection())
-            {
-                conn.ConnectionString = CONNECTION_STR;
-                conn.Open();
-                SQLiteCommand command = conn.CreateCommand();
-                command.CommandText = sql;
-                command.CommandType = System.Data.CommandType.Text;
-
-                command.Parameters.AddWithValue("id1", this.name);
-                command.Parameters.AddWithValue("id2", this.player_name);
-                command.Parameters.AddWithValue("id3", this.number_of_classes);
-
-                command.Parameters.AddWithValue("id4", this.race_id);
-                command.Parameters.AddWithValue("id5", this.alignment_id);
-                command.Parameters.AddWithValue("id6", this.deity);
-                command.Parameters.AddWithValue("id7", this.age);
-                command.Parameters.AddWithValue("id8", this.gender);
-                command.Parameters.AddWithValue("id9", this.height);
-                command.Parameters.AddWithValue("id10", this.weight);
-                command.Parameters.AddWithValue("id11", this.eyes);
-                command.Parameters.AddWithValue("id12", this.hair);
-                command.Parameters.AddWithValue("id13", this.skin);
-                command.Parameters.AddWithValue("id14", this.description);
-                if (isInsert)
-                {
-                    command.Parameters.AddWithValue("id15", this.deleted);
-                }
-                else
-                {
-                    command.Parameters.AddWithValue("id15", this.character_id);
-                }
-
-
-                i = command.ExecuteNonQuery();
-                conn.Close();
-            }
-            return i;
         }
 
         /// <summary>

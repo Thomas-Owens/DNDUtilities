@@ -17,13 +17,13 @@ namespace DNDUtilitiesLib
         const string FIELD = "alignment_id";
 
         // Setup fields with properties
-        private int alignment_id
+        public int alignment_id
         {
             get;
-            set;
+            private set;
         }
 
-        private string name
+        public string name
         {
             get;
             set;
@@ -33,7 +33,7 @@ namespace DNDUtilitiesLib
         /// Gets all records
         /// </summary>
         /// <returns>list of name and ability_id</returns>
-        public static List<NameKey> retrieveAll()
+        public static List<NameKey> retrieveAllAlignments()
         {
             return retrieveAll(TABLE, FIELD);
         }

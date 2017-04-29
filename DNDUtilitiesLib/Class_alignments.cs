@@ -18,16 +18,16 @@ namespace DNDUtilitiesLib
         const string LIST_FIELD = "alignment_id";
 
         // Setup fields with properties
-        private int class_id
+        public int class_id
         {
             get;
-            set;
+            private set;
         }
 
-        private int alignment_id
+        public int alignment_id
 	    {
 		    get;
-		    set;
+		    private set;
 	    }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace DNDUtilitiesLib
         /// </summary>
         /// <param name="classKey">Class to retrieve alignments for</param>
         /// <returns>List of name and keys</returns>
-        public List<NameKey> retrieveAllAlignments(int classKey)
+        public static List<NameKey> retrieveAllAlignments(int classKey)
         {
             return retrieveAll(TABLE, LIST_TABLE, LIST_FIELD, SELECT_FIELD, classKey);
         }
